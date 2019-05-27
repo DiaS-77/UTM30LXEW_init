@@ -9,11 +9,22 @@ class station(object):
             rospy.init_node('UTM30LXEW', anonymous=True)
 	    self.tic = 0
 	    self.toc = 0
+	    self.file1 = 0
             self.main_station()
 
         def main_station(self):
+	    self.file1 = open("Todo.txt", "a")
+	    self.file1.write("#Angle"+"\t"+"Ranges"+"\n")
             rospy.Subscriber('/echoes', MultiEchoLaserScan, self.callback)
+	    rospy.Subscriber('/joy',Joy,self.control)
             rospy.spin()
+
+	def control(self,data):
+	    butt = data.buttons
+	    A = int(butt[0])
+	    B = int(butt[1])
+	    if (A & B):
+		print "Hola"
 
         def callback(self,data):
 	    self.tic = rospy.get_time()
@@ -52,6 +63,7 @@ class station(object):
 			intensities_0[0,k] = float(aux2[0])
 			intensities_1[0,k] = float(aux2[1])
 			intensities_2[0,k] = float(aux2[2])
+	    	self.file1.write(str(theta[k])+"\t"+str(ranges_0[0,k])+"\t"+str(ranges_1[0,k])+"\t"+str(ranges_2[0,k])+"\n")
 	    self.toc=rospy.get_time()
 	    rospy.loginfo("Time: "+str(self.toc-self.tic))
 	    Xr_0 = np.cos(theta)*ranges_0[0,:]
@@ -68,16 +80,16 @@ class station(object):
 	    plt.legend()
 	    plt.show()
 	    plt.savefig('echoes_ranges.png')
-	    # Second Figure
-	    plt.figure(2)
-	    plt.clf()
-	    plt.scatter(Xr_0,Yr_0, s=0.5, c=intensities_0[0,:],label="echo 1")
-	    plt.scatter(Xr_1,Yr_1, s=0.5, c=intensities_1[0,:],label="echo 2")
-	    plt.scatter(Xr_2,Yr_2, s=0.5, c=intensities_2[0,:],label="echo 3")
-	    plt.colorbar()
-            plt.legend()
-            plt.show()
-            plt.savefig('echoes_intensities.png')
+#	    # Second Figure
+#	    plt.figure(2)
+#	    plt.clf()
+#	    plt.scatter(Xr_0,Yr_0, s=0.5, c=intensities_0[0,:],label="echo 1")
+#	    plt.scatter(Xr_1,Yr_1, s=0.5, c=intensities_1[0,:],label="echo 2")
+#	    plt.scatter(Xr_2,Yr_2, s=0.5, c=intensities_2[0,:],label="echo 3")
+#	    plt.colorbar()
+#           plt.legend()
+#           plt.show()
+#           plt.savefig('echoes_intensities.png')
 
 if __name__ == '__main__':
     hokuyo   = station('Station')
