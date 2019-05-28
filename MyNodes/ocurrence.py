@@ -1,5 +1,6 @@
 import rospy
 from sensor_msgs.msg import MultiEchoLaserScan
+from sensor_msgs.msg import Joy
 from std_msgs.msg import String
 import numpy as np
 
@@ -8,6 +9,7 @@ class station(object):
 	    rospy.init_node('Ocurence', anonymous=True)
 	    self.d=0
 	    self.cont=0
+	    self.cont2=0
 	    self.k=1000
 	    self.flag=0
 	    self.r=rospy.Rate(40)
@@ -18,28 +20,23 @@ class station(object):
 
 	def header_concurrence(self):
 	    rospy.sleep(4)
-	    #while not rospy.is_shutdown():
 	    while self.flag == 0:
 		node_distance = rospy.Subscriber('/Distance', String, self.header)
 		self.r.sleep()
 
     	def header(self,data):
-	    #print "Entre a header " + str(self.d)
 	    if self.d == 0:
-		#print "d=0"
 		self.flag=1
-	    	aux='"'
+	    	aux=':'
 		D = str(data).split(aux)
 		self.d = D[1]
-		#print "Distance: "+str(self.d)
 
 	def concurrence(self):
-	    #print "Entre a concurrence "+"flag: "+str(self.flag)
 	    global node_echo
 	    rospy.loginfo("Starting node")
 	    node_echo = rospy.Subscriber('/echoes', MultiEchoLaserScan, self.callback)
+	    rospy.Subscriber('/joy', Joy, self.SaveData)
 	    rospy.spin()
-	    #print "pase spin() flag: "+str(self.flag)
 	    self.writeText()
 
 	def callback(self,data):
@@ -63,11 +60,14 @@ class station(object):
 		    #print aux
 		    self.cont = self.cont+1
 
-	def writeText(self):
+	def SaveData(self):
+	    cont2 = cont2+1;
 	    rospy.loginfo("Beginning mesurment...")
 	    rospy.sleep(1.5)
-	    file1 = open("concurrence.txt", "a")
+	    file1 = open("concurrence.txt"+cont2, "w")
 	    file1.write("#ranges"+"\t"+"Intensities \t para D= "+str(self.d)+"\n")
+	    
+	def writeText(self):
 	    for i in range(0,self.k):
 		file1.write(str(self.ranges0[i])+"\t"+str(self.intensities0[i])+"\n")
 	    ranges_std = np.std(self.ranges0)
@@ -80,7 +80,6 @@ class station(object):
 	    rospy.loginfo("\t\tranges_avg: "+str(ranges_avg)+"\n\t\tintensities_avg: "+str(intensities_avg))
 	    file1.close()
 	    exit()
-	    
 
 if __name__ == '__main__':
     hokuyo   = station('Station')
