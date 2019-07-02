@@ -79,8 +79,11 @@ $ cd ~/ros_catkin_ws
 $ rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:stretch
 ```
 >>The ```--from-paths``` option indicates that you want to install the dependencies for an entire directory of packages, in this case src.
+
 >>The ```--ignore-src``` option indicates to rosdep that it shouldn't try to install any ROS packages in the src folder from the package manager, you don't need it to since you are building them ourselves.
+
 >>The ```--rosdistro``` option is required because you don't have a ROS environment setup, so we have to indicate to rosdep what version of ROS you are building for.
+
 >>Finally, the ```-y``` option indicates to rosdep that you don't want to be bothered by too many prompts from the package manager.
 
 After a while rosdep will finish installing system dependencies and you can continue. 
