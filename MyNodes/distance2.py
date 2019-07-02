@@ -38,6 +38,7 @@ class station(object):
 		aux = str(ranges[N0+k]).split("[")
 		aux = aux[1].split(",")
 		aux = aux[0].strip("]")
+#		print ranges[N0+k]
 		ranges_0[k] = float(aux)
 	    n = len(ranges_0)
 	    # # Distance mesurement
@@ -63,6 +64,7 @@ class station(object):
 	    # rospy.loginfo("Time: "+str(self.toc-self.tic))
 	    pub=rospy.Publisher('Distance_Angle',String,queue_size=1)
 	    pub.publish("Distance: "+str(avg)+"\nAngle relationship: "+str(angle)+"\nTime Delay: "+str(self.toc-self.tic))
+	    print "d: "+str(avg)+",\tAng: "+str(angle)
 
 if __name__ == '__main__':
     hokuyo   = station('Station')

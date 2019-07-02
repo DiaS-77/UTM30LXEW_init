@@ -72,14 +72,14 @@ class station(object):
             Yr_1 = np.sin(theta)*ranges_1[0,:]
 	    Xr_2 = np.cos(theta)*ranges_2[0,:]
             Yr_2 = np.sin(theta)*ranges_2[0,:]
-	    plt.figure(1)
-	    plt.clf()
-	    plt.plot(Xr_0,Yr_0,'.',label="echoe 1")
-	    plt.plot(Xr_1,Yr_1,'o',label="echoe 2")
-	    plt.plot(Xr_2,Yr_2,'*',label="echoe 3")
-	    plt.legend()
-	    plt.show()
-	    plt.savefig('echoes_ranges.png')
+#	    plt.figure(1)
+#	    plt.clf()
+#	    plt.plot(Xr_0,Yr_0,'.',label="echoe 1")
+#	    plt.plot(Xr_1,Yr_1,'o',label="echoe 2")
+#	    plt.plot(Xr_2,Yr_2,'*',label="echoe 3")
+#	    plt.legend()
+#	    plt.show()
+#	    plt.savefig('echoes_ranges.png')
 #	    # Second Figure
 #	    plt.figure(2)
 #	    plt.clf()
