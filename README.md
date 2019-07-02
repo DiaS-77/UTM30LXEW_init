@@ -3,28 +3,6 @@ This repository present an experimental characterization of a Hokuyo LiDAR UTM30
 ## Presentation
 This Repository is this repository is organized as follows:
 -- [UTM30LXEW_init.md](https://github.com/Tilaguy/UTM30LXEW_init/blob/master/README.md) ->
-/your_root        - path
-|--Readme      			 / Instructions to use the AlphaROVER
-|--src         			 / scripts for the system
-  |--roboclaw_node       /scripts to launch the control of the system
-	  |--src        
-	  |--config            
-	  |--launch with hierarchical scheme
-	  |--nodes
-	  |--CMakeLists.txt
-	  |--LICENCE.md
-	  |--package.xml
-	  |--README.md
-  |--arm.py
-  |--maestro.py
-  |--com.py
-  |--control_mode.py
-  |--ipmailer.py
-  |--laser_on.py
-  |--leds_on.py
-  |--lights_off.py
-  |--manual_mode.py
-  |--rc.local
 ## 1. ROS installing on Raspberry Pi 3 [[ROS_inst]]
 Raspberry PI 3 runs Raspbian Stretch lite as OS, which you cand download in next link. [Raspbian Stretch](https://www.raspberrypi.org/downloads/raspbian/)
 
