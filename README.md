@@ -1,8 +1,8 @@
 # UTM30LXEW_init
 This repository present an experimental characterization of a Hokuyo LiDAR UTM30LX-EW running through a Raspberry Pi 3 with ROS.
-## 1. ROS installing on Raspberry Pi 3 [ROS_inst]
-Raspberry PI 3 runs Raspbian Stretch lite as OS, which you cand download in next link.
-<https://www.raspberrypi.org/downloads/raspbian/>
+## 1. ROS installing on Raspberry Pi 3 [[ROS_inst]]
+Raspberry PI 3 runs Raspbian Stretch lite as OS, which you cand download in next link. [Raspbian Stretch](https://www.raspberrypi.org/downloads/raspbian/)
+
 Previos to the ROS installing process, you must be sure that the OS is on the most current version.
 ```
 $ sudo apt-get update
@@ -47,7 +47,7 @@ After that, it will want to fetch the core packages to be able to build them. Th
 $ rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall
 $ wstool init src kinetic-ros_comm-wet.rosinstall
 ```
-- LiDAR package [Chanel]:
+- LiDAR package [[Chanel]]:
 
 For the main objective of this project, it is necessary installing the LiDAR ROS package.
 ```
